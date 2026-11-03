@@ -1,4 +1,4 @@
-# 问先机 · wenxianji.cn
+# 问先机 · wenshijian.com
 # 默认允许全部抓取
 
 User-agent: *
@@ -29,4 +29,4 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://wenxianji.cn/sitemap.xml
+Sitemap: https://wenshijian.com/sitemap.xml
