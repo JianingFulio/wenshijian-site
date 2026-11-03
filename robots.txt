@@ -1,0 +1,32 @@
+# 问先机 · wenxianji.cn
+# 默认允许全部抓取
+
+User-agent: *
+Allow: /
+
+# 生成式引擎 / AI 搜索（GEO）
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://wenxianji.cn/sitemap.xml
