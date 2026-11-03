@@ -35,7 +35,7 @@
 
 ## 需要确认的事项
 
-1. **域名**：全站统一使用 `wenshijian.com`（共 22 处，含 canonical / OG / JSON-LD）。如需换成 `wenxianji.cn`，全局替换即可。
+1. **域名**：全站统一使用 `wenshijian.com`（共 22 处，含 canonical / OG / JSON-LD）。如需换成 `wenshijian.com`，全局替换即可。
 2. **结构化数据里的价格**：`SoftwareApplication.offers` 目前写的是 `price: 0`（免费体验）。上线后若有付费档，需要改成真实 Offers，否则搜索结果里的富摘要会不准。
 3. **备案信息**：公司主体与备案号已挂在页脚，若有变更需同步 `index.html` 页脚。
 
