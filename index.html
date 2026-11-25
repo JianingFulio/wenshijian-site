@@ -530,6 +530,10 @@
   footer .filing{font-size:11.5px;color:var(--ink-3);letter-spacing:.02em}
   footer .filing a{color:inherit;text-decoration:none;transition:color .3s}
   footer .filing a:hover{color:var(--ink)}
+.filing-sep{margin:0 7px;opacity:.45}
+.filing-police{display:inline-flex;align-items:center;gap:4px;vertical-align:middle}
+.filing-police img{display:block;width:14px;height:15px;opacity:.9}
+@media (max-width:520px){.filing{display:flex;flex-wrap:wrap;justify-content:center;gap:2px}.filing-sep{display:none}}
 
   /* ---------- 入场 ---------- */
   [data-rv]{opacity:0;transform:translateY(26px);
@@ -909,6 +913,8 @@
   <div class="copy">© 2026 问视间（上海）科技有限公司</div>
   <div class="filing">
     <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">沪ICP备2026053600号-2</a>
+    <span class="filing-sep">·</span>
+    <a class="filing-police" href="https://beian.mps.gov.cn/#/query/webSearch?code=31011502408132" target="_blank" rel="noopener noreferrer"><img src="/assets/beian.png" alt="公安联网备案" width="14" height="15">沪公网安备31011502408132号</a>
   </div>
 </footer>
 
