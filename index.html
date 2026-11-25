@@ -6,7 +6,7 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="theme-color" content="#F5F4F0">
 <title>问先机 · AI 客户线索引擎｜让你看见正在发生的需求</title>
-<meta name="description" content="问先机是新一代 AI 客户线索引擎。用一句话描述目标客户，8 秒返回正处于决策窗口期的企业线索：实时追踪 100 余万家市场主体、637 类画像标签与 24 维经营动态信号。不设搜索条件，也能在发现区偶遇高潜客户。">
+<meta name="description" content="问先机是新一代 AI 客户线索引擎。用一句话描述目标客户，8 秒返回正处于决策窗口期的企业线索：实时追踪 500 万家市场主体、637 类画像标签与 24 维经营动态信号。不设搜索条件，也能在发现区偶遇高潜客户。">
 <meta name="keywords" content="客户线索,线索获取,B2B 获客,销售线索,企业名录,AI 获客,先机指数,客户画像,跨境电商客户,新能源供应链,企业线索平台">
 <meta name="author" content="问先机">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="问先机">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:title" content="问先机 · AI 客户线索引擎｜让正在发生的需求，先被你看见">
-<meta property="og:description" content="用一句话描述你要找的客户，8 秒锁定处于决策窗口期的企业。覆盖 107 万家主体、24 维实时经营信号，让获客快人一步。">
+<meta property="og:description" content="用一句话描述你要找的客户，8 秒锁定处于决策窗口期的企业。覆盖 500 万家主体、24 维实时经营信号，让获客快人一步。">
 <meta property="og:url" content="https://wenshijian.com/">
 <meta property="og:image" content="https://wenshijian.com/assets/og-cover.png">
 <meta property="og:image:width" content="1200">
@@ -56,7 +56,7 @@
       "applicationSubCategory": "客户线索 / B2B 获客",
       "operatingSystem": "Web",
       "url": "https://wenshijian.com/",
-      "description": "用一句话描述目标客户，返回带先机指数的企业线索。包含线索集、发现区与客户抽屉，实时追踪 100 余万家市场主体与 24 维经营动态信号。",
+      "description": "用一句话描述目标客户，返回带先机指数的企业线索。包含线索集、发现区与客户抽屉，实时追踪 500 万家市场主体与 24 维经营动态信号。",
       "featureList": [
         "自然语言描述目标客户",
         "先机指数与 24 维经营动态信号",
@@ -621,7 +621,7 @@
 <!-- ================= 数据条 ================= -->
 <section class="stats" data-rv>
   <div class="stat"><b><span class="num" data-count="8">8</span><span class="u">秒</span></b><span>一句话生成精准线索</span></div>
-  <div class="stat"><b id="liveCount" data-base="1070000" data-per-day="6700"><span class="num" id="liveNum">1,070,000</span><span class="u">家</span></b><span>实时追踪活跃企业</span></div>
+  <div class="stat"><b id="liveCount"><span class="num">5,000,000+</span></b><span>实时追踪活跃企业</span></div>
   <div class="stat"><b><span class="num" data-count="637">637</span><span class="u">类</span></b><span>动态画像与经营信号</span></div>
 </section>
 
@@ -930,62 +930,6 @@
     document.querySelectorAll('[data-rv]').forEach(el=>el.classList.add('in'));
   }
 
-  /* 实时增长数字：从 107 万起，按每天 +6,700 持续向上跳
-     —— 数值落在 localStorage，刷新/下次访问接着上次的数继续走，不回到起点 */
-  (function(){
-    const el  = document.getElementById('liveCount');
-    const num = document.getElementById('liveNum');
-    if(!el || !num) return;
-    const BASE    = Number(el.dataset.base) || 1070000;
-    const PER_DAY = Number(el.dataset.perDay) || 6700;
-    const SPEED   = 60;                        // 加速倍数；改成 1 就是真实速度（约 13 秒 +1）
-    const perSec  = PER_DAY / 86400 * SPEED;   // ≈ 4.65 家 / 秒
-    const KEY     = 'wxj.entity.count';
-
-    function read(){
-      try{
-        const o = JSON.parse(localStorage.getItem(KEY));
-        if(o && typeof o.v === 'number' && typeof o.t === 'number') return o;
-      }catch(e){}
-      return null;
-    }
-    function save(v){
-      try{ localStorage.setItem(KEY, JSON.stringify({v: v, t: Date.now()})); }catch(e){}
-    }
-
-    /* 起点 = 上次存下的数 + 离线期间按真实速度增长的部分（最多补 30 天，防异常跳变） */
-    const memo = read();
-    let start = BASE;
-    if(memo && memo.v >= BASE){
-      const days = Math.max(0, (Date.now() - memo.t) / 86400000);
-      start = memo.v + Math.min(PER_DAY * 30, Math.floor(days * PER_DAY));
-    }
-
-    const t0 = Date.now();
-    let last = -1;
-    const realPerSec = PER_DAY / 86400;
-    const WARP = 120;   // 前 2 分钟按加速速度跳，之后回落到真实速度，避免长时间开着页面数字虚涨
-
-    function valueNow(){
-      const sec = (Date.now() - t0) / 1000;
-      const fast = Math.min(sec, WARP) * perSec;
-      const slow = Math.max(0, sec - WARP) * realPerSec;
-      return start + Math.floor(fast + slow);
-    }
-    const now = valueNow;
-
-    const tick = setInterval(()=>{
-      const v = now();
-      if(v !== last){ num.textContent = v.toLocaleString('en-US'); last = v; }
-    }, 150);
-
-    /* 每 2 秒、以及离开/切到后台时落盘 */
-    const flush = ()=> save(now());
-    const persist = setInterval(flush, 2000);
-    window.addEventListener('pagehide', flush);
-    document.addEventListener('visibilitychange', ()=>{ if(document.hidden) flush(); });
-    num.textContent = now().toLocaleString('en-US');
-  })();
 
   /* 滚动进度 + 导航反色 */
   const prog = document.getElementById('prog');
